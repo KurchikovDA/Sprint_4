@@ -1,7 +1,7 @@
 package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
+//Класс страницы "Для кого самокат"
 public class OrderPage1 {
     private WebDriver driver;
     // Конструктор

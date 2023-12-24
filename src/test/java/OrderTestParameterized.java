@@ -5,10 +5,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import page.MainPage;
-import page.OrderPage1;
-import page.OrderPage2;
-
+import pages.MainPage;
+import pages.OrderPage1;
+import pages.OrderPage2;
+//Заказ самоката. Весь флоу позитивного сценария. Обрати внимание, что есть две точки входа в сценарий: кнопка «Заказать» вверху страницы и внизу.
+//Из чего состоит позитивный сценарий:
+//Нажать кнопку «Заказать». На странице две кнопки заказа.
+//Заполнить форму заказа.
+//Проверить, что появилось всплывающее окно с сообщением об успешном создании заказа.
 @RunWith(Parameterized.class)
 public class OrderTestParameterized {
     private final String firstName;

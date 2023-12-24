@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import page.MainPage;
-import page.OrderPage1;
+import pages.MainPage;
+import pages.OrderPage1;
 
 //Проверить: если нажать на логотип «Самоката», попадёшь на главную страницу «Самоката».
 public class ScooterLogoTest {
