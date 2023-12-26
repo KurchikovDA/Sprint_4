@@ -1,11 +1,16 @@
 package pages;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 //Класс страницы "Для кого самокат"
-public class OrderPage1 {
+public class ForWhomScooterPage {
     private WebDriver driver;
     // Конструктор
-    public OrderPage1(WebDriver driver) {
+    public ForWhomScooterPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -61,6 +66,14 @@ public class OrderPage1 {
     }
 
 
+    private By forWhomScooterText = By.xpath(".//*[text() = 'Для кого самокат']"); //Локатор заголовка "Для кого самокат"
+
+    //Проверка, что форма "Для кого самокат" открылась
+    public void assertOrderDoneTextVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebElement checkStatusTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(forWhomScooterText));
+        Assert.assertTrue("Текст 'Заказ оформлен' не виден", checkStatusTextElement.isDisplayed());
+    }
 
 
 }

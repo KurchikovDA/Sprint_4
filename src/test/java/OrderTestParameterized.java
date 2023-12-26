@@ -5,9 +5,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import pages.AboutRentPage;
 import pages.MainPage;
-import pages.OrderPage1;
-import pages.OrderPage2;
+import pages.ForWhomScooterPage;
+
 //Заказ самоката. Весь флоу позитивного сценария. Обрати внимание, что есть две точки входа в сценарий: кнопка «Заказать» вверху страницы и внизу.
 //Из чего состоит позитивный сценарий:
 //Нажать кнопку «Заказать». На странице две кнопки заказа.
@@ -24,8 +26,10 @@ public class OrderTestParameterized {
 
     private WebDriver driver;
     private MainPage mainPage;
-    private OrderPage1 orderPage1;
-    private OrderPage2 orderPage2;
+    private ForWhomScooterPage forWhomScooterPage;
+    private AboutRentPage aboutRentPage;
+
+    public static final String SCOOTER_URL = "https://qa-scooter.praktikum-services.ru/"; //Адрес главной страницы "Яндекс Самоката"
 
     //Конструктор
     public OrderTestParameterized(String firstName, String lastName, String address, String phoneNumber, String deliveryDate, String comment) {
@@ -48,14 +52,14 @@ public class OrderTestParameterized {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "D:\\Program Files\\WebDriver\\bin\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver(); // Хром
-        //System.setProperty("webdriver.gecko.driver", "D:\\Program Files\\WebDriver\\bin\\geckodriver.exe");
+        //System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
         //driver = new FirefoxDriver(); // Мозилла
         mainPage = new MainPage(driver);
-        orderPage1 = new OrderPage1(driver);
-        orderPage2 = new OrderPage2(driver);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        forWhomScooterPage = new ForWhomScooterPage(driver);
+        aboutRentPage = new AboutRentPage(driver);
+        driver.get(SCOOTER_URL);
         mainPage.clickCookieButton();
         driver.manage().window().maximize();  //Расширение экрана
 
@@ -63,36 +67,26 @@ public class OrderTestParameterized {
 
     @Test
 
-    public void testOrder1() {
+    public void testFullOrderByFirstButton() {
         mainPage.clickOrderUpButton(); //Клик на верхнюю кнопку "Заказать" на главной странице
 
-        orderPage1.fillOrderForm1(firstName, lastName, address, phoneNumber);  //Заполняется форма "Для кого самокат"
-        orderPage1.nextButtonClick(); //Клик на кнопку "Далее"
+        forWhomScooterPage.fillOrderForm1(firstName, lastName, address, phoneNumber);  //Заполняется форма "Для кого самокат"
+        forWhomScooterPage.nextButtonClick(); //Клик на кнопку "Далее"
 
-        orderPage2.fillOrderForm2(deliveryDate, comment); // Заполняется форма "Про аренду"
+        aboutRentPage.fillOrderForm2(deliveryDate, comment); // Заполняется форма "Про аренду"
 
-        orderPage2.clickPlaceOrderButton(); // Клик на кнопку "Заказать"
-        orderPage2.clickYesButton(); //Клик на кнопку "Да"
-        //orderPage2.clickCheckStatusButton(); // Клик на кнопку "Оформить заказ", но пока её не трогаем.
-
-        orderPage2.assertCheckStatusButtonVisible(); //Проверка, что кнопка "Оформить заказ" Появилась, значит тест пройден
+        aboutRentPage.clickPlaceOrderButton(); // Клик на кнопку "Заказать"
+        aboutRentPage.clickYesButton(); //Клик на кнопку "Да"
+        //aboutRentPage.clickCheckStatusButton(); // Клик на кнопку "Оформить заказ", но пока её не трогаем.
+        //aboutRentPage.assertCheckStatusButtonVisible(); //Проверка, что кнопка "Оформить заказ" Появилась, значит тест пройден, запасной вариант
+        aboutRentPage.assertOrderDoneTextVisible(); //Проверка, что заголовок "Заказ оформлен" видим
     }
 
     @Test
 
-    public void testOrder2() {
+    public void testSecondOrderButton() {
         mainPage.scrollToOrderDownButtonAndClick(); //Скролл и клик на нижнюю кнопку "Заказать" на главной странице
-
-        orderPage1.fillOrderForm1(firstName, lastName, address, phoneNumber);  //Заполняется форма "Для кого самокат"
-        orderPage1.nextButtonClick(); //Клик на кнопку "Далее"
-
-        orderPage2.fillOrderForm2(deliveryDate, comment); // Заполняется форма "Про аренду"
-
-        orderPage2.clickPlaceOrderButton(); // Клик на кнопку "Заказать"
-        orderPage2.clickYesButton(); //Клик на кнопку "Да"
-        //orderPage2.clickCheckStatusButton(); // Клик на кнопку "Оформить заказ", но пока её не трогаем.
-
-        orderPage2.assertCheckStatusButtonVisible(); //Проверка, что кнопка "Оформить заказ" Появилась, значит тест пройден
+        forWhomScooterPage.assertOrderDoneTextVisible(); //Проверяется наличие текста "Для кого самокат"
     }
 
 

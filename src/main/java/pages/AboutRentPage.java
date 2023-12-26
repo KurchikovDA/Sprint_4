@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 //Класс страницы "Про аренду"
-public class OrderPage2 {
+public class AboutRentPage {
     private WebDriver driver;
     // Конструктор
-    public OrderPage2(WebDriver driver) {
+    public AboutRentPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -82,4 +82,16 @@ public void setDeliveryDate(String deliveryDate) {
         WebElement checkStatusButtonElement = wait.until(ExpectedConditions.visibilityOfElementLocated(checkStatusButton));
         Assert.assertTrue("Кнопка 'Посмотреть статус' не видна", checkStatusButtonElement.isDisplayed());
     }
+
+    private By orderDoneText = By.xpath(".//*[text() = 'Заказ оформлен']"); //Локатор заголовка "Заказ оформлен"
+
+    //Проверка, что заголовок "Заказ оформлен" видим
+    public void assertOrderDoneTextVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebElement checkStatusTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(orderDoneText));
+        Assert.assertTrue("Текст 'Заказ оформлен' не виден", checkStatusTextElement.isDisplayed());
+    }
+
+
 }
+
