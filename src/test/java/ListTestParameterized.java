@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.MainPage;
 
 import static org.junit.Assert.assertEquals;
@@ -52,11 +53,8 @@ public class ListTestParameterized {
         driver.get(SCOOTER_URL);
         driver.manage().window().maximize();  //Расширение экрана
         mainPage.clickCookieButton(); //Клик на куки
-
         //Скролл до начала таблицы, в Фаерфоксе тест проходит только с ним.
-        WebElement element = driver.findElement(By.id("accordion__heading-0"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        element.click();
+        mainPage.scrollToTable();
 
     }
 

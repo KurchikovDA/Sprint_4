@@ -138,4 +138,12 @@ private WebDriver driver;
     }
 
 
+    //Метод скролла до начала таблицы и клик на первый элемент, в Фаерфоксе тест проходит только с ним.
+    public void scrollToTable() {
+        WebElement element = driver.findElement(By.id("accordion__heading-0"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+    }
+
+
 }
