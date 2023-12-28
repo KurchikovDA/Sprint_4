@@ -82,12 +82,12 @@ public class OrderTestParameterized {
         aboutRentPage.assertOrderDoneTextVisible(); //Проверка, что заголовок "Заказ оформлен" видим
     }
 
-    @Test
+    /*@Test    //Тест второй кнопки, убрал в отдельный класс SecondOrderButtonTest, чтобы не повторялся.
 
     public void testSecondOrderButton() {
         mainPage.scrollToOrderDownButtonAndClick(); //Скролл и клик на нижнюю кнопку "Заказать" на главной странице
         forWhomScooterPage.assertOrderDoneTextVisible(); //Проверяется наличие текста "Для кого самокат"
-    }
+    } */
 
 
     @After
