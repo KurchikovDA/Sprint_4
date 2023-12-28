@@ -24,17 +24,13 @@ public class SecondOrderButtonTest {
         driver.get(SCOOTER_URL);
         mainPage.clickCookieButton();
         driver.manage().window().maximize();  //Расширение экрана
-
     }
 
-
     @Test
-
     public void testSecondOrderButton() {
         mainPage.scrollToOrderDownButtonAndClick(); //Скролл и клик на нижнюю кнопку "Заказать" на главной странице
         forWhomScooterPage.assertOrderDoneTextVisible(); //Проверяется наличие текста "Для кого самокат"
     }
-
 
     @After
     public void tearDown() {

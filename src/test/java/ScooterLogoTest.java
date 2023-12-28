@@ -30,10 +30,8 @@ public class ScooterLogoTest {
         //Клик на верхнюю кнопку "Заказать"
         mainPage.clickOrderUpButton();
     }
-
     @Test
     public void testScooterUrl() {
-
         mainPage.clickScooterLogo(); // Нажимаем на логотип Самоката
 
         // Проверяем, что текущий URL соответствует ожидаемому URL

@@ -42,7 +42,6 @@ public class ListTestParameterized {
                 {"Да, обязательно. Всем самокатов! И Москве, и Московской области.", 7}
         };
     }
-
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
